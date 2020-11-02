@@ -13,6 +13,8 @@ namespace Job_Portal_MVC.Models
         [Key]
         [Required]
         [Display(Name = "Email")]
+        [DataType(DataType.EmailAddress)]
+
         public string Email { get; set; }
         [Required]
         [Display(Name = "Password")]
@@ -57,17 +59,7 @@ namespace Job_Portal_MVC.Models
 
 
     }
-    public enum Qualification
-    {
-         No_formal_education,
-        Primary_education,
-        Secondary_education_or_high_school,
-        GED,
-        Vocational_qualification,
-         Bachelor_Degree,
-         Master_Degree,
-         Doctorate_or_higher
-    }
+    
     public enum Experiences
     {
         Experienced,
