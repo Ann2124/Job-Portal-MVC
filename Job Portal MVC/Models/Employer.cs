@@ -11,7 +11,8 @@ namespace Job_Portal_MVC.Models
     {
         [Key]
         [Required]
-        [Display(Name = "Employer ID")]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Mail ID")]
         public string employerId { get; set; }
         [Required]
         [Display(Name = "First Name")]
@@ -38,8 +39,8 @@ namespace Job_Portal_MVC.Models
         [Required]
         public string Organisation { get; set; }
 
-    
-        
+        public virtual ICollection<Openings> openings { get; set; }
+
     }
 }
     

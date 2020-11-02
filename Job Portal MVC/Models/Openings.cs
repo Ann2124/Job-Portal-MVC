@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Job_Portal_MVC.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,31 +13,33 @@ namespace Job_Portal_MVC
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int JobId { get; set; }
+        public int jobId { get; set; }
         [Required]
         [Display(Name = "Designation")]
-        public string Designation { get; set; }
+        public string designation { get; set; }
         [Required]
         [Display(Name = "Salary")]
-        public double Salary { get; set; }
+        public double salary { get; set; }
         [Required]
         [Display(Name = "Experience Required")]
-        public string Experience { get; set; }
+        public string experience { get; set; }
         [Required]
         [Display(Name = "Qualification Required")]
-        public string Qualification { get; set; }
+        public string qualification { get; set; }
         [Required]
         [Display(Name = "Job Location")]
-        public string Location { get; set; }
+        public string location { get; set; }
         [Required]
         [Display(Name = "Vacancies")]
-        public int Vacancy { get; set; }
+        public int vacancy { get; set; }
         [Required]
         [Display(Name = "Email")]
-
-        public string Email { get; set; }
+        public string employerID { get; set; }
         [Required]
         [Display(Name = "Company")]
-        public string Company { get; set; }
+        public string company { get; set; }
+
+        public virtual Employer employer { get; set; }
+        public virtual ICollection<application> applications { get; set; }
     }
 }

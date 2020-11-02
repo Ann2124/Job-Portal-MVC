@@ -12,14 +12,18 @@ namespace Job_Portal_MVC.Models
        
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int application_id { get; set; }
-        [Required(ErrorMessage ="Email  Id required")]
+        public int applicationId { get; set; }
+        [Required]
         [Display(Name = "Email Id")]
-        public string employerId { get; set; }
-        [Required(ErrorMessage = " Job Id required")]
+        public string email { get; set; }
+        [Required]
         [Display(Name = "Job Id")]
-        public int job_id{ get; set; }
+        public int jobId{ get; set; }
         public string status { get; set; }
+
+
+        public virtual User user { get; set; }
+        public virtual Openings Openings { get; set; }
 
     }
 }

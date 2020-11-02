@@ -15,49 +15,52 @@ namespace Job_Portal_MVC.Models
         [Display(Name = "Email")]
         [DataType(DataType.EmailAddress)]
 
-        public string Email { get; set; }
+        public string email { get; set; }
         [Required]
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
         [StringLength(255, ErrorMessage = "Password should be minimum of 8 characters", MinimumLength = 8)]
         [RegularExpression("^((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])|(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[^a-zA-Z0-9])|(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9])|(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^a-zA-Z0-9])).{8,}$", ErrorMessage = "Passwords must be at least 8 characters and should contain : upper case (A-Z), lower case (a-z), number (0-9) and special character (e.g. !@#$%^&*)")]
-        public string Password { get; set; }
+        public string password { get; set; }
         [NotMapped]
         [System.ComponentModel.DataAnnotations.Compare("Password")]
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Confirm Password required")]
-        public string ConfirmPassword { get; set; }
+        public string confirmPassword { get; set; }
         [Required]
         [Display(Name = "First name")]
-        public string Firstname { get; set; }
+        public string firstname { get; set; }
         [Required]
         [Display(Name = "Last name")]
-        public string Lastname { get; set; }
+        public string lastname { get; set; }
         [Display(Name = "Address")]
         [Required(ErrorMessage = "Address is required")]
-        public string Address { get; set; }
-        [Display(Name = "ContactNumber")]
+        public string address { get; set; }
+        [Display(Name = "Contact Number")]
         [Required(ErrorMessage = "Contact number is required")]
         [StringLength(10, MinimumLength = 10, ErrorMessage = "Your mobile number  is not valid")]
         [RegularExpression(@"^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$", ErrorMessage = "Please enter a valid mobile number")]
-        public string ContactNumber { get; set; }
+        public string contactNumber { get; set; }
         [Required]
         [Display(Name ="Highest Qualification")]
-        public string Qualification { get; set; }
+        public string qualification { get; set; }
         [Required]
         [Display(Name ="Year of Passout")]
         public string year { get; set; }
         [Required]
         [Display(Name = "Expiernced/Fresher")]
-        public string Experience;
+        public string experience;
+        [Required]
+        [Display(Name = "Year of Experience")]
+        public int yearofExperience;
         [Required]
         [Display(Name ="Last Employer")]
-        public string Employer { get; set; }
+        public string employer { get; set; }
         [Required]
-        [Display(Name = "Employee Details")]
-        public string EmployerDetails { get; set; }
+        [Display(Name = "Employer Details")]
+        public string employerDetails { get; set; }
 
-
+        public virtual ICollection<application> applications { get; set; }
     }
     
     public enum Experiences
