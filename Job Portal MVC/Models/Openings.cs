@@ -17,27 +17,26 @@ namespace Job_Portal_MVC
         [Display(Name = "Designation")]
         public string Designation { get; set; }
         [Required]
-        [Display(Name ="Salary")]
+        [Display(Name = "Salary")]
         public double Salary { get; set; }
         [Required]
-        [Display (Name ="Experience Required")]
+        [Display(Name = "Experience Required")]
         public string Experience { get; set; }
         [Required]
-        [Display(Name ="Qualification Required")]
+        [Display(Name = "Qualification Required")]
         public string Qualification { get; set; }
         [Required]
-        [Display(Name ="Job Location")]
+        [Display(Name = "Job Location")]
         public string Location { get; set; }
         [Required]
-        [Display(Name ="Vacancies")]
+        [Display(Name = "Vacancies")]
         public int Vacancy { get; set; }
         [Required]
         [Display(Name = "Email")]
 
         public string Email { get; set; }
         [Required]
-        [Display(Name ="Company")]
+        [Display(Name = "Company")]
         public string Company { get; set; }
     }
 }
-   
