@@ -60,7 +60,39 @@ namespace Job_Portal_MVC.Controllers
             }
             return clearText;
         }
+        public ActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register([Bind(Include ="email,password,confirmPassword,firstname,lastname,address,contactNumber,qualification,year,experience,yearofExperience,employer,employerDetails")]User usr)
+        {
+            usr.password = encrypt(usr.password);
+            usr.confirmPassword = encrypt(usr.confirmPassword);
+            var check = db.Users.Find(usr.email);
+            if (check == null)
+            {
+                db.Configuration.ValidateOnSaveEnabled = false;
+                db.Users.Add(usr);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
+            else
+            {
+                ModelState.AddModelError("", "User already Exists");
+                return View();
+            }
+        }
+        [Authorize]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Index");
+        }
 
     }
 }
