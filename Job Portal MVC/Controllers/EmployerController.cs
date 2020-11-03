@@ -30,6 +30,7 @@ namespace Job_Portal_MVC.Controllers
                 FormsAuthentication.SetAuthCookie(emp.employerId, false);
                 Session["UserId"] = employer.employerId.ToString();
                 Session["Username"] = (employer.firstName).ToString();
+                Session["Role"] = "Employer";
                 return RedirectToAction("Index", "Job");
 
             }
@@ -92,6 +93,39 @@ namespace Job_Portal_MVC.Controllers
             Session.Clear();
             Session.Abandon();
             return RedirectToAction("Index");
+        }
+        public ActionResult AddJob()
+        {
+            if (Session["UserId"] == null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View();
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public ActionResult AddJob([Bind(Include = "jobId,designation,salary,experience,qualification,location,vacancy,employerID,company")]Openings open)
+        {
+            if(ModelState.IsValid)
+            {
+                var check = db.Openings.Find(open.jobId);
+                if (check == null)
+                {
+                    db.Openings.Add(open);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(open);
+
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
     }
 }
