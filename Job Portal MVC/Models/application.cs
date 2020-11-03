@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Job_Portal_MVC.Models
 {
-    public class application
+    public class Application
     {
        
         [Key]

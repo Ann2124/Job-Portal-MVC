@@ -8,6 +8,8 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Data.Entity;
+using System.Web.Helpers;
 
 namespace Job_Portal_MVC.Controllers
 {
@@ -94,5 +96,83 @@ namespace Job_Portal_MVC.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult JobList()
+        {
+            return View();
+        }
+        
+        public ActionResult Apply(string jobId)
+        {
+            if (Session["UserId"] != null)
+            {
+                ViewBag.UserId = Session["UserId"].ToString();
+                ViewBag.JobId = jobId;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Register");
+            }
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult AddResume([Bind(Include = "email,jobId")]Application application, HttpPostedFileBase resume)
+        {
+            string pathresume = "";
+            try
+            {
+                if (resume.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(resume.FileName);
+                    string FileExtension = fileName.Substring(fileName.LastIndexOf('.') + 1).ToLower();
+                    if (FileExtension == "pdf")
+                    {
+                        fileName = application.email;
+                        pathresume = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+                        ViewBag.Message = "File Uploaded Successfully!!";
+                    }
+                    else
+                    {
+                        ViewBag.Status = "Select a PDF file";
+                    }
+                }
+            }
+            catch
+            {
+                ModelState.AddModelError("", "File Upload Failed");
+            }
+
+            if(resume!=null)
+            {
+                var Application = new Application()
+                {
+                    email = application.email,
+                    jobId = application.jobId,
+                    status = "pending"
+                    
+                };
+                db.Applications.Add(Application);
+                db.SaveChanges();
+
+                //Mail obj = new Mail();
+                //obj.ToEmail = application.email;
+                //obj.EmailSubject = "Applied for Job Position";
+                //obj.EMailBody = "You have successfully applied for the job position";
+                //WebMail.SmtpServer = "smtp.gmail.com";
+                //WebMail.SmtpPort = 587;
+                //WebMail.SmtpUseDefaultCredentials = true;
+                //WebMail.EnableSsl = true;
+                //WebMail.UserName = "JobPortal";
+                //WebMail.Password = "Mail Password";
+                //WebMail.From = "Your mailId here";
+                //WebMail.Send(to: obj.ToEmail, subject: obj.EmailSubject, body: obj.EMailBody, cc: obj.EmailCC, bcc: obj.EmailBCC, isBodyHtml: true);
+               
+                return RedirectToAction("JobList");
+            }
+            else
+                return View();
+        }
+
     }
+
 }

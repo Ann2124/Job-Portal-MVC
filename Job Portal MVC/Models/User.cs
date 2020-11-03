@@ -60,7 +60,7 @@ namespace Job_Portal_MVC.Models
         [Display(Name = "Employer Details")]
         public string employerDetails { get; set; }
 
-        public virtual ICollection<application> applications { get; set; }
+        public virtual ICollection<Application> applications { get; set; }
     }
     
     public enum Experiences
