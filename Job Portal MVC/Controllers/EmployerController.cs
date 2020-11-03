@@ -31,7 +31,7 @@ namespace Job_Portal_MVC.Controllers
                 Session["UserId"] = employer.employerId.ToString();
                 Session["Username"] = (employer.firstName).ToString();
                 Session["Role"] = "Employer";
-                return RedirectToAction("Index", "Job");
+                return RedirectToAction("AddJob");
 
             }
             else
@@ -108,24 +108,23 @@ namespace Job_Portal_MVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult AddJob([Bind(Include = "jobId,designation,salary,experience,qualification,location,vacancy,employerID,company")]Openings open)
+        public ActionResult AddJob([Bind(Include = "jobId,designation,salary,experience,qualification,location,vacancy")]Openings open)
         {
-            if(ModelState.IsValid)
-            {
+           
+                string empid = Session["UserId"].ToString();
+                var org = db.Employerss.Where(o => o.employerId.Equals(empid)).FirstOrDefault();
                 var check = db.Openings.Find(open.jobId);
                 if (check == null)
                 {
+                    open.employerID = empid;
+                    open.company = org.Organisation;
                     db.Openings.Add(open);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("AddJob");
                 }
-                return View(open);
+                return RedirectToAction("AddJob");
 
-            }
-            else
-            {
-                return RedirectToAction("Index");
-            }
+           
         }
     }
 }

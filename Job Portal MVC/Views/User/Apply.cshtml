@@ -7,27 +7,27 @@
 <h2>Apply</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Apply", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
+    <div class="form-horizontal">
 
-    <div class="form-group row px-3" style="font-size:medium;font-family:'Book Antiqua'">
-        <label class="col-4">Resume/CV</label>
+        <div class="form-group row px-3" style="font-size:medium;font-family:'Book Antiqua'">
+            <label class="col-4">resume</label>
+            <input type="hidden" value="@ViewBag.UserId"id="email" name="email" />
+            <input type="hidden" value="@ViewBag.JobId" id="jobId" name="jobId" />
+            @Html.TextBox("resume", "", new { type = "file", @class = "col form-control" }) <br />
 
-        @Html.TextBox("resume", "", new { type = "file", @class = "col form-control" }) <br />
 
-        <input type="hidden" id="email" value="@ViewBag["UserId"]" />
-        <input type="hidden" id="jobId" value="@ViewBag["JobId"]" />
 
+        </div>
+        <div class="form-group mt-5 text-center ">
+            <input type="Submit" value="Apply" class="btn btn-info" />
+            <br />
+            @ViewBag.Status
+        </div>
     </div>
-    <div class="form-group mt-5 text-center ">
-        <input type="Submit" value="AddResume" class="btn btn-info" />
-        <br />
-        @ViewBag.Status
-    </div>
-</div>
 }
 
 <div>

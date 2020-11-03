@@ -32,7 +32,7 @@ namespace Job_Portal_MVC.Controllers
                 FormsAuthentication.SetAuthCookie(usr.email, false);
                 Session["UserId"] = user.email.ToString();
                 Session["Username"] = (user.firstname).ToString();
-                return RedirectToAction("Index", "Job");
+                return RedirectToAction("JobList");
 
             }
             else
@@ -98,9 +98,11 @@ namespace Job_Portal_MVC.Controllers
 
         public ActionResult JobList()
         {
-            return View();
+            return View(db.Openings.ToList());
         }
-        
+
+        [Authorize]
+        [HttpGet]
         public ActionResult Apply(string jobId)
         {
             if (Session["UserId"] != null)
@@ -116,7 +118,7 @@ namespace Job_Portal_MVC.Controllers
         }
         [Authorize]
         [HttpPost]
-        public ActionResult AddResume([Bind(Include = "email,jobId")]Application application, HttpPostedFileBase resume)
+        public ActionResult Apply([Bind(Include = "email,jobId")]Application application, HttpPostedFileBase resume)
         {
             string pathresume = "";
             try

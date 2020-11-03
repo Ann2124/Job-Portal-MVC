@@ -288,6 +288,7 @@
     <Content Include="Views\User\Apply.cshtml" />
     <Content Include="Views\User\JobList.cshtml" />
     <Content Include="Views\Employer\AddJob.cshtml" />
+    <Content Include="Views\Employer\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
