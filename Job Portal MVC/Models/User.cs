@@ -26,6 +26,7 @@ namespace Job_Portal_MVC.Models
         [System.ComponentModel.DataAnnotations.Compare("Password")]
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Confirm Password required")]
+        [Display(Name ="Confirm Password")]
         public string confirmPassword { get; set; }
         [Required]
         [Display(Name = "First name")]
