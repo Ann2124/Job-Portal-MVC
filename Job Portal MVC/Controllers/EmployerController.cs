@@ -1,8 +1,10 @@
 ﻿using Job_Portal_MVC.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
@@ -31,7 +33,7 @@ namespace Job_Portal_MVC.Controllers
                 Session["UserId"] = employer.employerId.ToString();
                 Session["Username"] = (employer.firstName).ToString();
                 Session["Role"] = "Employer";
-                return RedirectToAction("AddJob");
+                return RedirectToAction("AppliedJob");
 
             }
             else
@@ -126,5 +128,56 @@ namespace Job_Portal_MVC.Controllers
 
            
         }
+        public ActionResult AppliedJob()
+        {
+            
+            return View(db.Applications.ToList());
+        }
+        [Authorize]
+        public ActionResult StatusEdit(int? applicationid)
+        {
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Employer")
+            {
+
+                if (applicationid == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                Application application = db.Applications.Find(applicationid);
+                if (applicationid == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(application);
+            }
+            else
+            {
+                return RedirectToAction("AppliedJob");
+
+            }
+        }
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult StatusEdit([Bind(Include = "applicationId,status")] Application application)
+        {
+            if (Session["UserId"] != null && Session["Role"].ToString() == "Employer")
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Entry(application).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("AppliedJob");
+                }
+                return View(application);
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+
+
+        }
+       
     }
 }

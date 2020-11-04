@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Job_Portal_MVC.Models.Application>
+
+@{
+    ViewBag.Title = "AppliedJob";
+}
+
+<h2>AppliedJob</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Openings.designation)
+        </th>
+        <th>
+            Name of the applicant
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user.qualification)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Openings.designation)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.user.firstname)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.user.qualification)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.status)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "StatusEdit", new { applicationid = item.applicationId }) |
+        @Html.ActionLink("Details", "Details", new { id = item.applicationId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.applicationId })
+    </td>
+</tr>
+}
+
+</table>
