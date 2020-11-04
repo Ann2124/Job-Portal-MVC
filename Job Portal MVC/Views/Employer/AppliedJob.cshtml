@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Job_Portal_MVC.Models.Application>
+﻿@model IEnumerable<Job_Portal_MVC.Openings>
 
 @{
     ViewBag.Title = "AppliedJob";
@@ -12,40 +12,64 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Openings.designation)
+            @Html.DisplayNameFor(model => model.employer.firstName)
         </th>
         <th>
-            Name of the applicant
+            @Html.DisplayNameFor(model => model.designation)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.user.qualification)
+            @Html.DisplayNameFor(model => model.salary)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.status)
+            @Html.DisplayNameFor(model => model.experience)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.qualification)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.vacancy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.company)
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Openings.designation)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.user.firstname)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.user.qualification)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.status)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "StatusEdit", new { applicationid = item.applicationId }) |
-        @Html.ActionLink("Details", "Details", new { id = item.applicationId }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.applicationId })
-    </td>
-</tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.employer.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.designation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.salary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.experience)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.qualification)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.vacancy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.company)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.jobId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.jobId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.jobId })
+        </td>
+    </tr>
 }
 
 </table>

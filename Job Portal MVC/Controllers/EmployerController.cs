@@ -131,7 +131,7 @@ namespace Job_Portal_MVC.Controllers
         public ActionResult AppliedJob()
         {
             
-            return View(db.Applications.ToList());
+            return View(db.Openings.ToList());
         }
         [Authorize]
         public ActionResult StatusEdit(int? applicationid)
