@@ -41,5 +41,14 @@ namespace Job_Portal_MVC
 
         public virtual Employer employer { get; set; }
         public virtual ICollection<Application> applications { get; set; }
+        public enum Experiences
+        {
+            No_Experience,
+            Upto_6_Months,
+            One_Year,
+            One_year_to_Two_years,
+            More_than_two_years
+
+        }
     }
 }

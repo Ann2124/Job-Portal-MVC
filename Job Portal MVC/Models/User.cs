@@ -70,5 +70,26 @@ namespace Job_Portal_MVC.Models
         Fresher
 
     }
-
+    public enum Qualifications
+    {
+        No_Former_Education,
+        Primary_Education,
+        Secondary_Education,
+        plus_two,
+        Diploma,
+        Bachelor_of_Arts,
+        Bachelor_of_Commerce,
+        Bachelor_of_Techhnology,
+        Bsc,
+        Bca,
+        Bba,
+        Ma,
+        Mcom,
+        Mtech,
+        MBA,
+        Msc,
+        Mca,
+        Phd,
+        Mphil
+    }
 }

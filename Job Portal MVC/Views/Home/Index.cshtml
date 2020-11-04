@@ -6,9 +6,7 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
     <tr>
        
@@ -37,33 +35,36 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-       
-        <td>
-            @Html.DisplayFor(modelItem => item.designation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.salary)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.experience)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.qualification)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.location)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.vacancy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.company)
-        </td>
-        <td>
-            <a href="/user/apply" class="btn btn-primary">Apply</a>
-        </td>
-    </tr>
+<tr>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.designation)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.salary)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.experience)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.qualification)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.location)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.vacancy)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.company)
+    </td>
+    <td>
+
+        @Html.ActionLink("Apply", "Apply","User",null, new { jobId = item.jobId })
+
+    </td>
+   
+</tr>
 }
 
 </table>
