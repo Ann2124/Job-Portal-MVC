@@ -128,12 +128,83 @@ namespace Job_Portal_MVC.Controllers
 
            
         }
+        [Authorize]
         public ActionResult AppliedJob()
         {
-            
-            return View(db.Openings.ToList());
+            string empId = Session["UserId"].ToString();
+            var data = db.Openings.Where(d => d.employerID.Equals(empId)).ToList();
+            return View(data);
         }
         [Authorize]
+        public ActionResult Viewapplied(int? jobId)
+        {
+            var app = db.Applications.Where(j => j.jobId == jobId && j.status.Equals("pending")).ToList();
+            return View(app);
+        }
+        [Authorize]
+        public ActionResult Details(int? applicationId)
+        {
+            ViewBag.applicationId = applicationId;
+            var app = db.Applications.Where(a => a.applicationId == applicationId).FirstOrDefault();
+            var user = db.Users.Where(u => u.email.Equals(app.email)).FirstOrDefault();
+            ViewBag.jobID = app.jobId;
+            //view resume code required(view)
+            return View(user);
+        }
+        [Authorize]
+        public ActionResult Accept(string applicationId)
+        {
+            int appId = int.Parse(applicationId);
+            var app = db.Applications.Find(appId);
+            app.status = "Accepted";
+            db.Entry(app).State = EntityState.Modified;
+            db.SaveChanges();
+            int jobId = app.jobId;
+            var opn = db.Openings.Where(o => o.jobId == jobId).FirstOrDefault();
+            opn.vacancy = opn.vacancy - 1;
+            db.Entry(opn).State = EntityState.Modified;
+            db.SaveChanges();
+            //Mail obj = new Mail();
+            //obj.ToEmail = application.email;
+            //obj.EmailSubject = "Job Applcation accepted";
+            //obj.EMailBody = "Congratulations, You are consifered for our job position";
+            //WebMail.SmtpServer = "smtp.gmail.com";
+            //WebMail.SmtpPort = 587;
+            //WebMail.SmtpUseDefaultCredentials = true;
+            //WebMail.EnableSsl = true;
+            //WebMail.UserName = "JobPortal";
+            //WebMail.Password = "Mail Password";
+            //WebMail.From = "Your mailId here";
+            //WebMail.Send(to: obj.ToEmail, subject: obj.EmailSubject, body: obj.EMailBody, cc: obj.EmailCC, bcc: obj.EmailBCC, isBodyHtml: true);
+            return RedirectToAction("Viewapplied", new { jobId = jobId });
+        }
+
+        [Authorize]
+        public ActionResult Reject(string applicationId,string jobID)
+        {
+            int appId = int.Parse(applicationId);
+            var app = db.Applications.Find(appId);
+            app.status = "Rejected";
+            db.Entry(app).State = EntityState.Modified;
+            db.SaveChanges();
+            int jobId = int.Parse(jobID);
+            //Mail obj = new Mail();
+            //obj.ToEmail = application.email;
+            //obj.EmailSubject = "Job application rejected";
+            //obj.EMailBody = "We are sorry, after check on your profile we don't find it suitable for this position, you may get back to us with other postings offer.";
+            //WebMail.SmtpServer = "smtp.gmail.com";
+            //WebMail.SmtpPort = 587;
+            //WebMail.SmtpUseDefaultCredentials = true;
+            //WebMail.EnableSsl = true;
+            //WebMail.UserName = "JobPortal";
+            //WebMail.Password = "Mail Password";
+            //WebMail.From = "Your mailId here";
+            //WebMail.Send(to: obj.ToEmail, subject: obj.EmailSubject, body: obj.EMailBody, cc: obj.EmailCC, bcc: obj.EmailBCC, isBodyHtml: true);
+            return RedirectToAction("Viewapplied", new { jobId =jobId });
+        }
+
+
+        [Authorize] 
         public ActionResult StatusEdit(int? applicationid)
         {
             if (Session["UserId"] != null && Session["Role"].ToString() == "Employer")

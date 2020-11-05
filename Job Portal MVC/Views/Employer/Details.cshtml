@@ -1,0 +1,76 @@
+﻿@model Job_Portal_MVC.Models.User
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.firstname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.firstname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contactNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contactNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.qualification)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.qualification)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.employer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.employer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.employerDetails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.employerDetails)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Accept", "Accept", new { applicationId = ViewBag.applicationId}) 
+    @Html.ActionLink("Reject", "Reject", new { applicationId = ViewBag.applicationId, ViewBag.jobID })
+</p>
