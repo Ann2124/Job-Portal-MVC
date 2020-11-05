@@ -148,7 +148,6 @@ namespace Job_Portal_MVC.Controllers
             var app = db.Applications.Where(a => a.applicationId == applicationId).FirstOrDefault();
             var user = db.Users.Where(u => u.email.Equals(app.email)).FirstOrDefault();
             ViewBag.jobID = app.jobId;
-            //view resume code required(view)
             return View(user);
         }
         [Authorize]

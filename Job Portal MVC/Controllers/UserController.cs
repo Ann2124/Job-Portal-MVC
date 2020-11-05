@@ -135,7 +135,7 @@ namespace Job_Portal_MVC.Controllers
                         {
                             fileName = application.email.Substring(0, application.email.Length - 4);
                             fileName = fileName + ".pdf";
-                            pathresume = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+                            pathresume = Path.Combine(Server.MapPath("~/Resumes"), fileName);
                             resume.SaveAs(pathresume);
                             ViewBag.Message = "File Uploaded Successfully!!";
                         }
