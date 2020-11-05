@@ -17,9 +17,9 @@
             <li class="nav-item"><a href="/home/contact" class="nav-link" style="color:white">Customer Care<span><i class="fa fa-phone" style="color:white"></i></span></a> </li>
 
             <li>
-                <form method="get" action="/Product/Search">
+                <form method="get" action="/User/Search">
                     <div class="input-group ">
-                        @Html.TextBox("ProductName", null, new { @class = "form-control ", @style = "width:300px", @placeholder = "Search for products, brands and more" })
+                        @Html.TextBox("designation", null, new { @class = "form-control ", @style = "width:300px", @placeholder = "Search for jobs" })
 
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-light ">

@@ -71,6 +71,7 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Accept", "Accept", new { applicationId = ViewBag.applicationId}) 
-    @Html.ActionLink("Reject", "Reject", new { applicationId = ViewBag.applicationId, ViewBag.jobID })
+    <a href="/employer/accept?applicationId=@ViewBag.applicationId?jobID=@ViewBag.jobID" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Accept</a>
+    <a href="/employer/reject?applicationId=@ViewBag.applicationId?jobID=@ViewBag.jobID" class="btn btn-danger btn-sm"><i class="fa fa-times"></i> Reject</a>
+
 </p>
