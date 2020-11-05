@@ -203,7 +203,7 @@ namespace Job_Portal_MVC.Controllers
             return RedirectToAction("Viewapplied", new { jobId =jobId });
         }
 
-
+        
         [Authorize] 
         public ActionResult StatusEdit(int? applicationid)
         {

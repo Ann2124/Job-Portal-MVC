@@ -1,5 +1,4 @@
 ﻿@model Job_Portal_MVC.Models.User
-
 @{
     ViewBag.Title = "Details";
 }
@@ -70,8 +69,19 @@
 
     </dl>
 </div>
-<p>
-    <a href="/employer/accept?applicationId=@ViewBag.applicationId?jobID=@ViewBag.jobID" class="btn btn-success btn-sm"><i class="fa fa-check"></i> Accept</a>
-    <a href="/employer/reject?applicationId=@ViewBag.applicationId?jobID=@ViewBag.jobID" class="btn btn-danger btn-sm"><i class="fa fa-times"></i> Reject</a>
+<div>
+    @{ var pdf = Model.email.Substring(0, Model.email.Length - 4) + ".pdf";}
+    <img src="~/App_Data/pdf" />
+</div>
+<div class="btn btn-danger btn-sm">
+    @Html.ActionLink("ViewResume", "ViewResume")
+</div>
 
-</p>
+
+
+<div class="btn btn-success btn-sm">
+    @Html.ActionLink("Accept", "Accept", new { applicationId = ViewBag.applicationId, jobID = ViewBag.jobID })
+</div>
+<div class="btn btn-danger btn-sm">
+    @Html.ActionLink("Reject", "Reject", new { applicationId = ViewBag.applicationId, jobID = ViewBag.jobID })
+</div>

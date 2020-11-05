@@ -125,24 +125,28 @@ namespace Job_Portal_MVC.Controllers
             string pathresume = "";
             string FileExtension = "";
             try
-            {
-                if (resume.ContentLength > 0)
+            { if (resume != null)
                 {
-                    string fileName = Path.GetFileName(resume.FileName);
-                    FileExtension = fileName.Substring(fileName.LastIndexOf('.') + 1).ToLower();
-                    if (FileExtension == "pdf")
+                    if (resume.ContentLength > 0)
                     {
-                        fileName = application.email.Substring(0,application.email.Length-4);
-                        fileName = fileName + ".pdf";
-                        pathresume = Path.Combine(Server.MapPath("~/App_Data"), fileName);
-                        resume.SaveAs(pathresume);
-                        ViewBag.Message = "File Uploaded Successfully!!";
-                    }
-                    else
-                    {
-                        ViewBag.Status = "Select a PDF file";
+                        string fileName = Path.GetFileName(resume.FileName);
+                        FileExtension = fileName.Substring(fileName.LastIndexOf('.') + 1).ToLower();
+                        if (FileExtension == "pdf")
+                        {
+                            fileName = application.email.Substring(0, application.email.Length - 4);
+                            fileName = fileName + ".pdf";
+                            pathresume = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+                            resume.SaveAs(pathresume);
+                            ViewBag.Message = "File Uploaded Successfully!!";
+                        }
+                        else
+                        {
+                            ViewBag.Status = "Select a PDF file";
+                        }
                     }
                 }
+                else
+                    ViewBag.Status = "Upload a File";
             }
             catch
             {
