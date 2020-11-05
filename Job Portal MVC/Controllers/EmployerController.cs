@@ -152,7 +152,7 @@ namespace Job_Portal_MVC.Controllers
             return View(user);
         }
         [Authorize]
-        public ActionResult Accept(string applicationId)
+        public ActionResult Accept(string applicationId, string jobID)
         {
             int appId = int.Parse(applicationId);
             var app = db.Applications.Find(appId);
@@ -203,7 +203,7 @@ namespace Job_Portal_MVC.Controllers
             return RedirectToAction("Viewapplied", new { jobId =jobId });
         }
 
-
+        
         [Authorize] 
         public ActionResult StatusEdit(int? applicationid)
         {
