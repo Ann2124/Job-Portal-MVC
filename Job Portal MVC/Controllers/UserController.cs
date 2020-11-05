@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using System.Data.Entity;
 using System.Web.Helpers;
+using System.Web.Optimization;
 
 namespace Job_Portal_MVC.Controllers
 {
@@ -122,16 +123,19 @@ namespace Job_Portal_MVC.Controllers
         public ActionResult Apply([Bind(Include = "email,jobId")] Application application, HttpPostedFileBase resume)
         {
             string pathresume = "";
+            string FileExtension = "";
             try
             {
                 if (resume.ContentLength > 0)
                 {
                     string fileName = Path.GetFileName(resume.FileName);
-                    string FileExtension = fileName.Substring(fileName.LastIndexOf('.') + 1).ToLower();
+                    FileExtension = fileName.Substring(fileName.LastIndexOf('.') + 1).ToLower();
                     if (FileExtension == "pdf")
                     {
-                        fileName = application.email;
+                        fileName = application.email.Substring(0,application.email.Length-4);
+                        fileName = fileName + ".pdf";
                         pathresume = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+                        resume.SaveAs(pathresume);
                         ViewBag.Message = "File Uploaded Successfully!!";
                     }
                     else
@@ -145,7 +149,7 @@ namespace Job_Portal_MVC.Controllers
                 ModelState.AddModelError("", "File Upload Failed");
             }
 
-            if (resume != null)
+            if (resume != null && FileExtension=="pdf")
             {
                 var Application = new Application()
                 {
