@@ -225,6 +225,32 @@ namespace Job_Portal_MVC.Controllers
                 return RedirectToAction("Index", "User");
             }
         }
+        public ActionResult Search(string designation)
+        {
+            var list = new List<Openings>();
+            if (String.IsNullOrEmpty(designation))
+            {
+                list = db.Openings.ToList();
+            }
+            else
+            {
+                list = db.Openings.Where(d => d.designation.Equals(designation)).ToList();
+                if(list.Count==0)
+                {
+                    list = db.Openings.Where(d => d.qualification.Equals(designation)).ToList();
+                    if(list.Count==0)
+                    {
+                        list = db.Openings.Where(d => d.company.Equals(designation)).ToList();
+                        if(list.Count==0)
+                        {
+                            list = db.Openings.Where(d => d.location.Equals(designation)).ToList();
+                        }
+                    }
+                }
+            }
+            return View("JobList", list);
+
+        }
 
     }
 
