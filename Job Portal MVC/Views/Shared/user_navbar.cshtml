@@ -1,10 +1,10 @@
 ﻿<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="navbar-brand">
-        
+
 
         @*<i class="font">Happy Retails</i>*@
 
-       
+
     </div>
     <style>
         .font {
@@ -22,6 +22,34 @@
 
         </ul>
     </div>
+    <div class="font">
+
+
+        <ul class="nav navbar-nav ml-auto">
+
+        
+
+
+
+                <form method="get" action="/Product/Search">
+                    <div class="input-group ">
+                        @Html.TextBox("ProductName", null, new { @class = "form-control ", @style = "width:400px", @placeholder = "Search for products, brands and more" })
+
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-light ">
+                                <i class="fa fa-search text-primary"></i>
+                            </button>
+                        </div>
+                    </div>
+
+
+                </form>
+           
+
+        </ul>
+
+
+    </div>
 
     <div class="font">
 
@@ -36,11 +64,10 @@
                 <li class="nav-item" style="color:white">Hi @Session["Username"]<i class="fa fa-user-circle-o" style="color:white"></i> </li>
 
                 @*<li class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">
-            Hi @Session["Username"] <i class="fa fa-user-circle-o" style="color:white"></i>
-        </li>*@
+                        Hi @Session["Username"] <i class="fa fa-user-circle-o" style="color:white"></i>
+                    </li>*@
 
-                <li class="nav-item"><a href="/user/cart" class="nav-link" style="color:white">Add Jobs<span><i class="fa fa-rupee-sign" style="color:white"></i></span></a> </li>
-                <li class="nav-item"><a href="/user/cart" class="nav-link" style="color:white">Requests<span><i class="fa fa-rupee-sign" style="color:white"></i></span></a> </li>
+                <li class="nav-item"><a href="/user/cart" class="nav-link" style="color:white">Applied Jobs<span><i class="fa fa-rupee-sign" style="color:white"></i></span></a> </li>
                 <li class="nav-item"><a href="/user/cart" class="nav-link" style="color:white">Logout<span><i class="fa fa-sign-out" style="color:white"></i></span></a> </li>
             </ul>
         </div>
