@@ -32,6 +32,7 @@ namespace Job_Portal_MVC.Controllers
                 FormsAuthentication.SetAuthCookie(usr.email, false);
                 Session["UserId"] = user.email.ToString();
                 Session["Username"] = (user.firstname).ToString();
+                Session["Role"] = "user";
                 return RedirectToAction("JobList");
 
             }
@@ -68,7 +69,7 @@ namespace Job_Portal_MVC.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register([Bind(Include ="email,password,confirmPassword,firstname,lastname,address,contactNumber,qualification,year,experience,yearofExperience,employer,employerDetails")]User usr)
+        public ActionResult Register([Bind(Include = "email,password,confirmPassword,firstname,lastname,address,contactNumber,qualification,year,experience,yearofExperience,employer,employerDetails")] User usr)
         {
             usr.password = encrypt(usr.password);
             usr.confirmPassword = encrypt(usr.confirmPassword);
@@ -118,7 +119,7 @@ namespace Job_Portal_MVC.Controllers
         }
         [Authorize]
         [HttpPost]
-        public ActionResult Apply([Bind(Include = "email,jobId")]Application application, HttpPostedFileBase resume)
+        public ActionResult Apply([Bind(Include = "email,jobId")] Application application, HttpPostedFileBase resume)
         {
             string pathresume = "";
             try
@@ -144,14 +145,14 @@ namespace Job_Portal_MVC.Controllers
                 ModelState.AddModelError("", "File Upload Failed");
             }
 
-            if(resume!=null)
+            if (resume != null)
             {
                 var Application = new Application()
                 {
                     email = application.email,
                     jobId = application.jobId,
                     status = "pending"
-                    
+
                 };
                 db.Applications.Add(Application);
                 db.SaveChanges();
@@ -168,13 +169,66 @@ namespace Job_Portal_MVC.Controllers
                 //WebMail.Password = "Mail Password";
                 //WebMail.From = "Your mailId here";
                 //WebMail.Send(to: obj.ToEmail, subject: obj.EmailSubject, body: obj.EMailBody, cc: obj.EmailCC, bcc: obj.EmailBCC, isBodyHtml: true);
-               
+
                 return RedirectToAction("JobList");
             }
             else
                 return View();
         }
+        [Authorize]
+        public ActionResult Edit()
+        {
+            string username = User.Identity.Name;
+            User user = db.Users.FirstOrDefault(u => u.email.Equals(username));
+            User model = new User();
+            model.firstname = user.firstname;
+            model.lastname = user.lastname;
+            model.address = user.address;
+            model.qualification = user.qualification;
+            model.contactNumber = user.contactNumber;
+            model.year = user.year;
+            model.experience = user.experience;
+            model.yearofExperience = user.yearofExperience;
+            model.employer = user.employer;
+            model.employerDetails = user.employerDetails;
+            return View(model);
+
+        }
+        [Authorize]
+        [HttpPost]
+        public ActionResult Edit(User usr)
+        {
+            if (Session["UserId"] != null && Session["Role"].ToString() == "user")
+            {
+
+                string username = User.Identity.Name;
+                User user = db.Users.FirstOrDefault(u => u.email.Equals(username));
+                user.firstname = usr.firstname;
+                user.lastname = usr.lastname;
+                user.address = usr.address;
+                user.contactNumber = usr.contactNumber;
+                user.qualification = usr.qualification;
+                user.year = usr.year;
+                user.experience = usr.experience;
+                user.yearofExperience = usr.yearofExperience;
+                user.employer = usr.employer;
+                user.employerDetails = usr.employerDetails;
+                user.password = user.password;
+                user.confirmPassword = user.password;
+                Session["Username"] = (user.firstname).ToString();
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return View(usr);
+            }
+            else
+            {
+                return RedirectToAction("Index", "User");
+            }
+        }
 
     }
 
 }
+    
+
+
