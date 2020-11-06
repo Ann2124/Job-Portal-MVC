@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Edit";
 }
+@Html.Partial("user_navbar")
 
 <h2>Edit</h2>
 
@@ -10,14 +11,14 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>User</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.email)
 
-        
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.firstname, htmlAttributes: new { @class = "control-label col-md-2" })

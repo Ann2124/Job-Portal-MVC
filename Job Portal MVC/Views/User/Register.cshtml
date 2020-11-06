@@ -1,5 +1,6 @@
 ﻿@model Job_Portal_MVC.Models.User
 
+@Html.Partial("Common_Navbar")
 
 <div class="d-flex justify-content-center">
 
@@ -113,16 +114,16 @@
                     <div class="d-flex justify-content-center">
                         <input type="submit" class="btn btn-lg btn-primary" value="Register" />
                     </div>
-                    
+
                 </div>
             </div>
         }
-        </div>
     </div>
+</div>
 <div class="d-flex justify-content-center">
     <a href="/user/index" class="btn btn-primary btn-sm"><i class="fa fa-backward"></i> Back</a>
 
 </div>
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -3,12 +3,14 @@
 @{
     ViewBag.Title = "JobList";
 }
+@Html.Partial("user_navbar")
+
 
 <h2>JobList</h2>
 
 <table class="table">
     <tr>
-       
+
         <th>
             @Html.DisplayNameFor(model => model.designation)
         </th>
@@ -33,36 +35,37 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        
-        <td>
-            @Html.DisplayFor(modelItem => item.designation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.salary)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.experience)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.qualification)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.location)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.vacancy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.company)
-        </td>
-        <td>
-           
-            @Html.ActionLink("Apply", "Apply", new { jobId=item.jobId}) 
-           
-        </td>
-    </tr>
-}
-    
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.designation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.salary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.experience)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.qualification)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vacancy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.company)
+            </td>
+            <td>
+
+                @Html.ActionLink("Apply", "Apply", new { jobId = item.jobId })
+
+            </td>
+        </tr>
+    }
+
 </table>

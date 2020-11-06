@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Apply";
 }
+@Html.Partial("user_navbar")
 
 <h2>Apply</h2>
 
@@ -15,7 +16,7 @@
 
         <div class="form-group row px-3" style="font-size:medium;font-family:'Book Antiqua'">
             <label class="col-4">resume</label>
-            <input type="hidden" value="@ViewBag.UserId"id="email" name="email" />
+            <input type="hidden" value="@ViewBag.UserId" id="email" name="email" />
             <input type="hidden" value="@ViewBag.JobId" id="jobId" name="jobId" />
             @Html.TextBox("resume", "", new { type = "file", @class = "col form-control" }) <br />
 

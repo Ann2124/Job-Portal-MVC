@@ -461,6 +461,10 @@
     <Content Include="Views\Employer\Viewapplied.cshtml" />
     <Content Include="Views\Employer\Details.cshtml" />
     <Content Include="Views\Shared\user_navbar.cshtml" />
+    <Content Include="Views\Shared\Common_Navbar.cshtml" />
+    <Content Include="Views\Employer\AcceptedRequests.cshtml" />
+    <Content Include="Views\Employer\RejectedRequests.cshtml" />
+    <Content Include="Views\Employer\PendingRequests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

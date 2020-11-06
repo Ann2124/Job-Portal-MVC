@@ -248,6 +248,21 @@ namespace Job_Portal_MVC.Controllers
 
 
         }
-       
+        public ActionResult AcceptedRequests()
+        {
+            var app = db.Applications.Where(a => a.status.Equals("Accepted")).ToList();
+            return View(app);
+        }
+        public ActionResult RejectedRequests()
+        {
+            var app = db.Applications.Where(a => a.status.Equals("Rejected")).ToList();
+            return View(app);
+        }
+        public ActionResult PendingRequests()
+        {
+            var app = db.Applications.Where(a => a.status.Equals("pending")).ToList();
+            return View(app);
+        }
+
     }
 }

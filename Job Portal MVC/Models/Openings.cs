@@ -1,6 +1,5 @@
-﻿using Job_Portal_MVC.Models;
-using Newtonsoft.Json;
-using System;
+﻿using System;
+using Job_Portal_MVC.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -38,17 +37,11 @@ namespace Job_Portal_MVC
         [Required]
         [Display(Name = "Company")]
         public string company { get; set; }
-
+        
         public virtual Employer employer { get; set; }
         public virtual ICollection<Application> applications { get; set; }
-        public enum Experiences
-        {
-            No_Experience,
-            Upto_6_Months,
-            One_Year,
-            One_year_to_Two_years,
-            More_than_two_years
-
-        }
+       
     }
+   
+
 }

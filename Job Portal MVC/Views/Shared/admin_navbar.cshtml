@@ -20,21 +20,7 @@
             <li class="nav-item"><a href="/home/about" class="nav-link" style="color:white">About<span><i class="fa fa-info-circle" style="color:white"></i></span></a></li>
             <li class="nav-item"><a href="/home/contact" class="nav-link" style="color:white">Customer Care<span><i class="fa fa-phone" style="color:white"></i></span></a> </li>
 
-            <li>
-                <form method="get" action="/User/Search">
-                    <div class="input-group ">
-                        @Html.TextBox("designation", null, new { @class = "form-control ", @style = "width:300px", @placeholder = "Search for jobs" })
-
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-light ">
-                                <i class="fa fa-search text-primary"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                </form>
-            </li>
-
+           
         </ul>
     </div>
 
@@ -54,9 +40,22 @@
             Hi @Session["Username"] <i class="fa fa-user-circle-o" style="color:white"></i>
         </li>*@
 
-                <li class="nav-item"><a href="/user/cart" class="nav-link" style="color:white">Add Jobs<span><i class="fa fa-rupee-sign" style="color:white"></i></span></a> </li>
-                <li class="nav-item"><a href="/user/cart" class="nav-link" style="color:white">Requests<span><i class="fa fa-rupee-sign" style="color:white"></i></span></a> </li>
-                <li class="nav-item"><a href="/user/cart" class="nav-link" style="color:white">Logout<span><i class="fa fa-sign-out" style="color:white"></i></span></a> </li>
+                <li class="nav-item"><a href="/employer/addjob" class="nav-link" style="color:white">Add vacancies<span><i class="fa fa-rupee-sign" style="color:white"></i></span></a> </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">
+                        Requests
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="~/employer/acceptedrequests">Accepted Applications</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/employer/rejectedrequests">Rejeceted Applications</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/employer/pendingrequests">Pending Applications</a>
+                    </div>
+
+
+                </li>
+                <li class="nav-item"><a href="/employer/logout" class="nav-link" style="color:white">Logout<span><i class="fa fa-sign-out" style="color:white"></i></span></a> </li>
             </ul>
         </div>
     </div>

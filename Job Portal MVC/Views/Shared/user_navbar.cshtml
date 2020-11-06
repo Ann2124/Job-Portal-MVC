@@ -31,9 +31,9 @@
 
 
 
-                <form method="get" action="/Product/Search">
+                <form method="get" action="/User/Search">
                     <div class="input-group ">
-                        @Html.TextBox("ProductName", null, new { @class = "form-control ", @style = "width:400px", @placeholder = "Search for products, brands and more" })
+                        @Html.TextBox("designation", null, new { @class = "form-control ", @style = "width:400px", @placeholder = "Search for Jobs" })
 
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-light ">
@@ -68,7 +68,7 @@
                     </li>*@
 
                 <li class="nav-item"><a href="/user/cart" class="nav-link" style="color:white">Applied Jobs<span><i class="fa fa-rupee-sign" style="color:white"></i></span></a> </li>
-                <li class="nav-item"><a href="/user/cart" class="nav-link" style="color:white">Logout<span><i class="fa fa-sign-out" style="color:white"></i></span></a> </li>
+                <li class="nav-item"><a href="/user/logout" class="nav-link" style="color:white">Logout<span><i class="fa fa-sign-out" style="color:white"></i></span></a> </li>
             </ul>
         </div>
     </div>

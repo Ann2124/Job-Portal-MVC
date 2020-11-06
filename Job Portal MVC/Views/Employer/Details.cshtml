@@ -4,6 +4,8 @@
 }
 
 <h2>Details</h2>
+@Html.Partial("admin_navbar")
+
 
 <div>
     <h4>User</h4>
@@ -73,7 +75,7 @@
     @{ var pdf = Model.email.Substring(0, Model.email.Length - 4) + ".pdf"; }
     <iframe src="~/Resumes/@pdf"></iframe>
     <br />
-    
+
     <a href="~/Resumes/@pdf">View Resume</a>
     <br />
     <br />

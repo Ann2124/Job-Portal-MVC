@@ -1,22 +1,20 @@
 ﻿@model IEnumerable<Job_Portal_MVC.Models.Application>
 
-@{
-    ViewBag.Title = "Viewapplied";
-}
-@Html.Partial("admin_navbar")
-
-
-<h2>Viewapplied</h2>
-
 
 <table class="table">
     <tr>
+
         <th>
-            Name of Applicant
+            Name of the Applicant
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Openings.designation)
         </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -28,10 +26,19 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Openings.designation)
             </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
             <td>
                 @Html.ActionLink("Details", "Details", new { applicationId = item.applicationId })
             </td>
+
         </tr>
     }
 
 </table>
+<div>
+    @Html.ActionLink("Back to List", "AppliedJob")
+</div>
+

@@ -3,15 +3,17 @@
 @{
     ViewBag.Title = "AppliedJob";
 }
+@Html.Partial("admin_navbar")
+
 
 <h2>AppliedJob</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add Vacancies", "AddJob")
 </p>
 <table class="table">
     <tr>
-        
+
         <th>
             @Html.DisplayNameFor(model => model.designation)
         </th>
@@ -33,30 +35,31 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.designation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.salary)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.experience)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.qualification)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.location)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.vacancy)
-        </td>
-        <td>
-            @Html.ActionLink("View", "ViewApplied", new { jobId=item.jobId }) 
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.designation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.salary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.experience)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.qualification)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.vacancy)
+            </td>
+            <td>
+                @Html.ActionLink("View", "ViewApplied", new { jobId = item.jobId })
+            </td>
+        </tr>
+    }
 
 </table>
